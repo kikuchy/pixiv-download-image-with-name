@@ -1,0 +1,13 @@
+{
+	"manifest_version": 2,
+	"version": "0.1",
+	"name": "pixiv-download-image-with-name",
+	"description": "",
+	"content_scripts": [{
+		"run_at": "document_start",
+		"js": ["includes/main.js"],
+		"matches": [
+			"http://www.pixiv.net/member_illust.php?*"
+		]
+	}]
+}

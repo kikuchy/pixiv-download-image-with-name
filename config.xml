@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="http://www.example.org/helloworld">
+	<name>pixiv-download-image-with-name</name>
+	<description>pixivの画像を、良い感じに名前を付けてダウンロードできるようにします。</description>
+  	<author href="http://kikuchy.github.io" email="kikuchy.h@gmail.com">kikuchy</author>
+</widget>

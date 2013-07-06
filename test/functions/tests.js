@@ -36,7 +36,7 @@ module("functions", {
             postDate: (new Date(1372977720000)).valueOf()
         };
         if(document.location.href.indexOf("?") < 1)
-            window.history.pushState("", document.title, document.location.href + "?mode=big&illust_id=36842281&namingdata=%7B%22illustId%22%3A36842281%2C%22userId%22%3A154806%2C%22illustTitle%22%3A%22%E9%9B%A8%E4%B8%8A%E3%81%8C%E3%82%8A%22%2C%22illustDescription%22%3A%22%E3%81%97%E3%81%A3%E3%81%A8%E3%82%8A%E3%80%82%22%2C%22userName%22%3A%22uki%22%2C%22postDate%22%3A1372977720000%7D");
+            window.history.pushState("", document.title, document.location.href + "?mode=big&illust_id=36842281&namingdata=%7B%22illustId%22%3A36842281%2C%22userId%22%3A154806%2C%22illustTitle%22%3A%22%E9%9B%A8%E4%B8%8A%E3%81%8C%E3%82%8A%22%2C%22illustDescription%22%3A%22%E3%81%97%E3%81%A3%E3%81%A8%E3%82%8A%E3%80%82%22%2C%22userName%22%3A%22uki%22%2C%22postDate%22%3A1372977720000%7D&page=0");
     }
 });
 
@@ -119,6 +119,7 @@ test("setDownloadAttribute", function(){
     setDownloadAttribute(window.expect);
     var a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
     equal(a.download, "雨上がり - uki - 36842281", "移動先のページで正しくdownload attributeに値をセットできている");
+    document.body.removeChild(a);
 });
 
 test("appendScriptTag", function(){
@@ -140,3 +141,17 @@ test("createNewImagePathFunction", function(){
     var actual = createNewImagePathFunction(window.expect);
     equal(actual, expect, "新しいimagePathを作れる");
 });
+
+test("getPageNum", function(){
+    var expect = 0;
+    var actual = getPageNum();
+    equal(actual, expect, "URLからページ番号を取得する");
+});
+
+test("setDownloadAttributeManga", function(){
+    setDownloadAttributeManga(window.expect, 0);
+    var a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
+    equal(a.download, "雨上がり - uki - 36842281_1", "移動先の漫画イラストオリジナルサイズ表示ページで正しくdownload attributeに値をセットできている");
+    document.body.removeChild(a);
+});
+

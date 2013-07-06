@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 	copy: {
 		main: {
 			files: [
-				{expand: true, src: ["manifest.json", "config.xml"], dest: "packaging/"}
+				{expand: true, src: ["manifest.json"], dest: "packaging/"}
 			]
 		}
 	},

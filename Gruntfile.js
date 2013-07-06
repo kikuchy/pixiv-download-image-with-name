@@ -22,10 +22,10 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: {
-        curly: true,
+        curly: false,
         eqeqeq: true,
         immed: true,
-        latedef: true,
+        latedef: false,
         newcap: true,
         noarg: true,
         sub: true,
@@ -34,7 +34,9 @@ module.exports = function(grunt) {
         boss: true,
         eqnull: true,
         browser: true,
-        globals: {}
+        globals: {
+            window: true
+        }
       },
       gruntfile: {
         src: 'Gruntfile.js'

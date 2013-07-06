@@ -14,6 +14,7 @@
 /* global getUserId */
 /* global getIllustId */
 /* global getPropaties */
+/* global appendScriptTag */
 
 module("functions", {
     setup: function(){
@@ -23,7 +24,8 @@ module("functions", {
                 userId: 154806,
                 illustTitle: "雨上がり",
                 userName: "uki"
-            }
+            },
+            mangaViewer: {}
         };
         window.expect = {
             illustId: 36842281,
@@ -117,4 +119,24 @@ test("setDownloadAttribute", function(){
     setDownloadAttribute(window.expect);
     var a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
     equal(a.download, "雨上がり - uki - 36842281", "移動先のページで正しくdownload attributeに値をセットできている");
+});
+
+test("appendScriptTag", function(){
+    var expect = "var num = 1;";
+    appendScriptTag(expect);
+    var tags = document.getElementsByTagName("script"),
+        script = tags[tags.length - 1];
+    equal(script.innerText, expect, "任意の内容のscriptタグを挿入できる");
+});
+
+test("createNewImagePathFunction", function(){
+    var expect = "window.pixiv.mangaViewer.imagePath = function(page) {\
+		return '/member_illust.php?' + pixiv.queryString({\
+			mode     : 'manga_big',\
+			illust_id: pixiv.context.illustId,\
+			page     : page - 1\
+		}) + '&namingdata=%7B%22illustId%22%3A36842281%2C%22userId%22%3A154806%2C%22illustTitle%22%3A%22%E9%9B%A8%E4%B8%8A%E3%81%8C%E3%82%8A%22%2C%22illustDescription%22%3A%22%E3%81%97%E3%81%A3%E3%81%A8%E3%82%8A%E3%80%82%22%2C%22userName%22%3A%22uki%22%2C%22postDate%22%3A1372977720000%7D';\
+};";
+    var actual = createNewImagePathFunction(window.expect);
+    equal(actual, expect, "新しいimagePathを作れる");
 });

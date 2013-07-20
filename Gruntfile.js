@@ -79,7 +79,16 @@ module.exports = function(grunt) {
 			dest: "dist/",
 			privateKey: "~/.ssh/browser-extensions-key.pem"
 		}
-	}
+	},
+    compress: {
+        main: {
+            options: {
+                mode :"zip",
+                archive: "dist/<%= pkg.title || pkg.name %>-<%= pkg.version %>.zip"
+            },
+            src: ["packaging/*"]
+        }
+    }
   });
 
   // These plugins provide necessary tasks.
@@ -91,6 +100,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mkdir');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-crx');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'mkdir', 'concat', 'copy', 'crx']);

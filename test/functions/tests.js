@@ -15,6 +15,9 @@
 /* global getIllustId */
 /* global getPropaties */
 /* global appendScriptTag */
+/* global createNewImagePathFunction */
+/* global getPageNum */
+/* global setDownloadAttributeManga */
 
 module("functions", {
     setup: function(){

@@ -36,7 +36,8 @@ module.exports = function(grunt) {
         browser: true,
         globals: {
             window: true
-        }
+        },
+		multistr: true
       },
       gruntfile: {
         src: 'Gruntfile.js'

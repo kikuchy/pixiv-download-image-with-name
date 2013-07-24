@@ -118,7 +118,7 @@ test("getPopatiesFromPreviousPage", function(){
 test("setDownloadAttribute", function(){
     setDownloadAttribute(window.expect);
     var a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
-    equal(a.download, "雨上がり - uki - 36842281", "移動先のページで正しくdownload attributeに値をセットできている");
+    equal(a.download, "雨上がり - uki - 36842281.jpg", "移動先のページで正しくdownload attributeに値をセットできている");
     document.body.removeChild(a);
 });
 

@@ -14,5 +14,6 @@
 		"matches": [
 			"http://www.pixiv.net/member_illust.php?*"
 		]
-	}]
+	}],
+    "options_page": "options.html"
 }

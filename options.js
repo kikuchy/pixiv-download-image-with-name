@@ -9,12 +9,12 @@ var changeEventHandler = function(e){
 	settings[this.name] = this.value;
 };
 
-var client = document.getElementById("client");
-client.addEventListener('change', changeEventHandler, false);
-client.addEventListener('keydown', changeEventHandler, false);
-client.value = settings.client || "TwitterForMac";
+var illustname = document.getElementById("illustname");
+illustname.addEventListener('change', changeEventHandler, false);
+illustname.addEventListener('keydown', changeEventHandler, false);
+illustname.value = settings.client || "{illustTitle} - {userName} - {illustId}";
 
-var screenname = document.getElementById("screenname");
-screenname.addEventListener("change", changeEventHandler, false);
-screenname.addEventListener("keydown", changeEventHandler, false);
-screenname.value = settings.screenname || "";
+var manganame = document.getElementById("manganame");
+manganame.addEventListener("change", changeEventHandler, false);
+manganame.addEventListener("keydown", changeEventHandler, false);
+manganame.value = settings.screenname || "{illustTitle} - {userName} - {illustId}_{page}";

@@ -70,7 +70,8 @@ module.exports = function(grunt) {
 		main: {
 			files: [
 				{expand: true, src: ["manifest.json", "options.html", "options.js", "css/*.css"], dest: "packaging/"},
-                {expand: true, src: ["icons/*"], dest: "packaging/", filter: "isFile"}
+                {expand: true, src: ["icons/*"], dest: "packaging/", filter: "isFile"},
+                {expand: true, src: ["lib/backgrounds.js"], dest: "packaging/"}
 			]
 		}
 	},

@@ -4,7 +4,7 @@
   "description": "pixivの画像を、良い感じに名前を付けてダウンロードできるようにします。",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt qunit"
   },
   "repository": "",
   "author": "kikuchy",

@@ -66,9 +66,9 @@
   <a class="full-size-container" href="member_illust.php?mode=manga_big&illust_id=36842281" style="display:none;"><i></i></a>
   <script src="../../node_modules/grunt-contrib-qunit/test/libs/qunit.js"></script>
   <script type="text/javascript">
-    var browser = chrome || opera;
-    browser.runtime = browser.runtime || {};
-    browser.runtime.sendMessage = browser.runtime.sendMessage || function(request, callback){
+    window.chrome = window.chrome || {};
+    chrome.runtime = chrome.runtime || {};
+    chrome.runtime.sendMessage = chrome.runtime.sendMessage || function(request, callback){
         if(request == "requestSettings"){
             callback({
                 illustname: window.illustname,

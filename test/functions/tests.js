@@ -186,3 +186,9 @@ test("selectDateParser", function(){
     var dateParser = selectDateParser();
     equal(dateParser, parseJapaneseStyleDate, "言語に合わせた日付けパーサーを選択できる");
 });
+
+test("parseJapaneseStyleDate", function(){
+    var expect = new Date(2013, 7 - 1, 5, 7, 42);
+    var actual = parseJapaneseStyleDate("2013年7月5日 07:42");
+    equal(actual.getTime(), expect.getTime(), "日本語形式の日付けをDateオブジェクトに変換できる");
+});

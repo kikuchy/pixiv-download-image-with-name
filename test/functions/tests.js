@@ -36,7 +36,7 @@ module("functions", {
             illustTitle: "雨上がり",
             illustDescription: "しっとり。",
             userName: "uki",
-            postDate: (new Date(1372977720000)).valueOf()
+            postDate: (new Date(2013, 7 - 1, 5, 7, 42)).valueOf()
         };
         if(document.location.href.indexOf("?") < 1)
             window.history.pushState("", document.title, document.location.href + "?mode=big&illust_id=36842281&namingdata=%7B%22illustId%22%3A36842281%2C%22userId%22%3A154806%2C%22illustTitle%22%3A%22%E9%9B%A8%E4%B8%8A%E3%81%8C%E3%82%8A%22%2C%22illustDescription%22%3A%22%E3%81%97%E3%81%A3%E3%81%A8%E3%82%8A%E3%80%82%22%2C%22userName%22%3A%22uki%22%2C%22postDate%22%3A1372977720000%7D&page=0");

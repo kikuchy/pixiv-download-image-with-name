@@ -193,3 +193,8 @@ test("setPropatiesToNextPageManga", function(){
     href = a.href.substr(slashIndex + 1);
     equal(href, "member_illust.php?mode=manga_big&illust_id=36842281&namingdata=%7B%22illustId%22%3A36842281%2C%22userId%22%3A154806%2C%22illustTitle%22%3A%22%E9%9B%A8%E4%B8%8A%E3%81%8C%E3%82%8A%22%2C%22illustDescription%22%3A%22%E3%81%97%E3%81%A3%E3%81%A8%E3%82%8A%E3%80%82%22%2C%22userName%22%3A%22uki%22%2C%22postDate%22%3A1372977720000%7D", "漫画のオリジナルサイズリンクのGETパラメータに値を追加できている");
 });
+
+test("selectDateParser", function(){
+    var dateParser = selectDateParser();
+    equal(dateParser, parseJapaneseStyleDate, "言語に合わせた日付けパーサーを選択できる");
+});

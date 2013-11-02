@@ -98,23 +98,11 @@ test("getPostDateString", function(){
     equal(dateString, expect, "投稿日時の文字列表現を取得する");
 });
 
-test("parseDate", function(){
-    var date = parseDate("2013年7月5日 07:42");
-    var expect = new Date(1372977720000);
-    equal(date.valueOf(), expect.valueOf(), "日時のパースを行う");
-});
-
 test("formatFileName", function(){
     var propaties = window.expect;
     var fileName = formatFileName(propaties, "{illustTitle} - {userName} - {illustId}");
     var expect = "雨上がり - uki - 36842281";
     equal(fileName, expect, "与えられたフォーマット指定子からファイル名を生成する");
-});
-
-test("setDownloadAttribute", function(){
-    var a = document.createElement("a");
-    a.download = "雨上がり - uki - 36842281";
-    equal(a.download, "雨上がり - uki - 36842281", "a[download]に正しく値をセットできる");
 });
 
 test("setPropatiesToNextPage", function(){

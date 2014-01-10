@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"version": "0.4.6",
+	"version": "0.4.9",
 	"name": "pixiv-download-image-with-name",
 	"description": "pixivの画像を、良い感じに名前を付けてダウンロードできるようにします。",
     "icons": {

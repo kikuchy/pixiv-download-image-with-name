@@ -1,23 +1,23 @@
-/* global module */
-/* global test */
-/* global equal */
-/* global deepEqual */
-/* global setDownloadAttribute */
-/* global getPropatiesFromPreviousPage */
-/* global setPropatiesToNextPage */
-/* global formatFileName */
-/* global parseDate */
-/* global getPostDateString */
-/* global getUserName */
-/* global getIllustDescription */
-/* global getIllustTitle */
-/* global getUserId */
-/* global getIllustId */
-/* global getPropaties */
-/* global appendScriptTag */
-/* global createNewImagePathFunction */
-/* global getPageNum */
-/* global setDownloadAttributeManga */
+/* global   module,
+            test,
+            equal,
+            deepEqual */
+/* global   chrome, opera */
+/* global   getPropatiesFromPreviousPage,
+            setPropatiesToNextPage,
+            setPropatiesToNextPageManga,
+            getPropaties,
+            getPageNum */
+/* global   getIllustId,
+            getUserId,
+            getIllustTitle,
+            getIllustDescription,
+            getUserName,
+            getPostDateString,
+            selectDateParser,
+            parseJapaneseStyleDate
+*/
+
 
 module("functions", {
     setup: function(){
@@ -45,7 +45,7 @@ module("functions", {
         var browser = chrome || opera;
         browser.runtime = browser.runtime || {};
         browser.runtime.sendMessage = browser.runtime.sendMessage || function(request, callback){
-            if(request == "requestSettings"){
+            if(request === "requestSettings"){
                 callback({
                     illustname: window.illustname,
                     manganame: window.manganame
@@ -98,13 +98,6 @@ test("getPostDateString", function(){
     equal(dateString, expect, "投稿日時の文字列表現を取得する");
 });
 
-test("formatFileName", function(){
-    var propaties = window.expect;
-    var fileName = formatFileName(propaties, "{illustTitle} - {userName} - {illustId}");
-    var expect = "雨上がり - uki - 36842281";
-    equal(fileName, expect, "与えられたフォーマット指定子からファイル名を生成する");
-});
-
 test("setPropatiesToNextPage", function(){
     setPropatiesToNextPage(window.expect);
     var div = document.getElementsByClassName("works_display")[0];
@@ -120,58 +113,10 @@ test("getPopatiesFromPreviousPage", function(){
     deepEqual(actual, window.expect, "GETパラメーターから値を正しく取得できる");
 });
 
-test("setDownloadAttribute", function(){
-    setDownloadAttribute(window.expect);
-    var a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
-    equal(a.download, "雨上がり - uki - 36842281.jpg", "移動先のページで正しくdownload attributeに値をセットできている");
-    document.body.removeChild(a);
-    var orgIllustname = window.illustname;
-    window.illustname = "pixivillust {illustTitle}.{userName}";
-    setDownloadAttribute(window.expect);
-    a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
-    equal(a.download, "pixivillust 雨上がり.uki.jpg", "ファイル名のフォーマットを変えても動作する");
-    document.body.removeChild(a);
-    window.illustname = orgIllustname;
-});
-
-test("appendScriptTag", function(){
-    var expect = "var num = 1;";
-    appendScriptTag(expect);
-    var tags = document.getElementsByTagName("script"),
-        script = tags[tags.length - 1];
-    equal(script.innerText, expect, "任意の内容のscriptタグを挿入できる");
-});
-
-test("createNewImagePathFunction", function(){
-    var expect = "window.pixiv.mangaViewer.imagePath = function(page) {\
-		return '/member_illust.php?' + pixiv.queryString({\
-			mode     : 'manga_big',\
-			illust_id: pixiv.context.illustId,\
-			page     : page - 1\
-		}) + '&namingdata=%7B%22illustId%22%3A36842281%2C%22userId%22%3A154806%2C%22illustTitle%22%3A%22%E9%9B%A8%E4%B8%8A%E3%81%8C%E3%82%8A%22%2C%22illustDescription%22%3A%22%E3%81%97%E3%81%A3%E3%81%A8%E3%82%8A%E3%80%82%22%2C%22userName%22%3A%22uki%22%2C%22postDate%22%3A1372977720000%7D';\
-};";
-    var actual = createNewImagePathFunction(window.expect);
-    equal(actual, expect, "新しいimagePathを作れる");
-});
-
 test("getPageNum", function(){
     var expect = 0;
     var actual = getPageNum();
     equal(actual, expect, "URLからページ番号を取得する");
-});
-
-test("setDownloadAttributeManga", function(){
-    setDownloadAttributeManga(window.expect, 0);
-    var a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
-    equal(a.download, "雨上がり - uki - 36842281_1.jpg", "移動先の漫画イラストオリジナルサイズ表示ページで正しくdownload attributeに値をセットできている");
-    document.body.removeChild(a);
-    var orgManganame = window.manganame;
-    window.manganame = "pixivmanga {illustTitle}.{userName}.{page}";
-    setDownloadAttributeManga(window.expect, 0);
-    a = document.evaluate('/html/body/a', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE,null ).singleNodeValue;
-    equal(a.download, "pixivmanga 雨上がり.uki.1.jpg", "ファイル名のフォーマットを変えるとファイル名も変わる");
-    document.body.removeChild(a);
-    window.manganame = orgManganame;
 });
 
 test("setPropatiesToNextPageManga", function(){

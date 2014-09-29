@@ -38,16 +38,40 @@
 	</head>
 	<body>
 		<div class="container">
-			<form class="optionform">
-				<h2>オプション : pixiv image downloader</h2>
-				<fieldset>
-					<label for="illustname">一枚絵につけるファイル名</label>
-                    <input id="illustname" name="illustname" class="input-xxlarge" type="text" placeholder="一枚絵につけるファイル名" />
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="optionform">
+                        <h2>オプション : pixiv image downloader</h2>
+                        <fieldset>
+                            <label for="illustname">一枚絵につけるファイル名</label>
+                            <input id="illustname" name="illustname" class="input-xxlarge" type="text" placeholder="一枚絵につけるファイル名" />
 
-                    <label for="manganame">漫画作品につけるファイル名</label>
-                    <input id="manganame" name="manganame" class="input-xxlarge" type="text" placeholder="漫画作品につけるファイル名" />
-				</fieldset>
-			</form>
+                            <label for="manganame">漫画作品につけるファイル名</label>
+                            <input id="manganame" name="manganame" class="input-xxlarge" type="text" placeholder="漫画作品につけるファイル名" />
+                        </fieldset>
+                    </form>
+                    <div>
+                        <h3>使えるオプション</h3>
+                        <p>ファイル名の中で使えるオプションです。</p>
+                        <dl>
+                            <dt><code>{illustId}</code></dt>
+                            <dd>イラスト・漫画の作品IDです</dd>
+                            <dt><code>{userId}</code></dt>
+                            <dd>作品作者のユーザーIDです</dd>
+                            <dt><code>{illustTitle}</code></dt>
+                            <dd>イラスト・漫画のタイトルです</dd>
+                            <dt><code>{illustDescription}</code></dt>
+                            <dd>イラスト・漫画のキャプションです。作品によっては長いのでファイル名にするには不適切かもしれません</dd>
+                            <dt><code>{userName}</code></dt>
+                            <dd>作品作者のユーザー名です</dd>
+                            <dt><code>{postDate}</code></dt>
+                            <dd>作品の投稿にちびです</dd>
+                            <dt><code>{page}</code></dt>
+                            <dd>漫画作品のページ番号です。漫画のファイル名にのみ使用できます</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
 		</div>
 		<script type="text/javascript" src="options.js"></script>
 	</body>

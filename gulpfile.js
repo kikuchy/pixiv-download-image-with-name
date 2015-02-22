@@ -1,9 +1,12 @@
 'use strict'
 
 var gulp = require('gulp');
-var duo = require('gulp-duo');
 var del = require('del');
 var eslint = require('gulp-eslint');
+var gutil = require('gulp-util');
+var debug = require('gulp-debug');
+var exec = require('gulp-exec');
+var rename = require('gulp-rename');
 
 // Extensionに含める静的ファイル群をコピー
 gulp.task('copy', function () {
@@ -16,10 +19,7 @@ gulp.task('copy', function () {
     gulp.src('lib/backgrounds.js').pipe(
         gulp.dest('packaging/lib')
     );
-    gulp.src(['options.html', 'options.js']).pipe(
-        gulp.dest('packaging/')
-    );
-    gulp.src('manifest.json').pipe(
+    return gulp.src(['manifest.json', 'options.html', 'options.js']).pipe(
         gulp.dest('packaging/')
     );
 });
@@ -27,14 +27,17 @@ gulp.task('copy', function () {
 // 以前は分割したファイルを単純に結合していたのでconcat。
 // 今はduoを使っているのでduoとかにした方が良かったかもしれない。
 gulp.task('concat', function () {
-    gulp.src('lib/trigger.js').pipe(duo()).pipe(gulp.dest('packaging/includes/main.js'));
+    return gulp.src('lib/trigger.js')
+        .pipe(exec('./node_modules/.bin/duo -o tmp <%= file.path %>; mkdir -p packaging/includes; mv tmp/lib/trigger.js packaging/includes/main.js; rm -rf tmp components', function (err, stdout, stderr){
+        console.log(stdout);
+        }));
 });
 
 // 一時ファイルを削除
-gulp.task('clean', function () {
+gulp.task('clean', function (cb) {
     del([
         'packaging/**'
-    ]);
+    ], cb);
 });
 
 gulp.task('lint', function () {

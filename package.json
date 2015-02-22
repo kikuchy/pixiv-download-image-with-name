@@ -28,6 +28,11 @@
     "gulp-duo": "^0.2.0",
     "del": "^1.1.1",
     "eslint": "^0.15.0",
-    "gulp-eslint": "^0.4.3"
+    "gulp-eslint": "^0.4.3",
+    "gulp-util": "^3.0.3",
+    "gulp-debug": "^2.0.0",
+    "duo-gulp": "0.0.1",
+    "gulp-exec": "^2.1.1",
+    "gulp-rename": "^1.2.0"
   }
 }

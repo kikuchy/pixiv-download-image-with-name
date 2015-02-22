@@ -6,7 +6,6 @@ var eslint = require('gulp-eslint');
 var gutil = require('gulp-util');
 var debug = require('gulp-debug');
 var exec = require('gulp-exec');
-var rename = require('gulp-rename');
 
 // Extensionに含める静的ファイル群をコピー
 gulp.task('copy', function () {

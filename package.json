@@ -1,8 +1,8 @@
 {
   "name": "pixiv-download-image-with-name",
-  "version": "0.0.1",
+  "version": "0.6.0",
   "description": "pixivの画像を、良い感じに名前を付けてダウンロードできるようにします。",
-  "main": "Gruntfile.js",
+  "main": "./gulpfile",
   "scripts": {
     "test": "grunt qunit"
   },
@@ -22,6 +22,12 @@
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-copy": "~0.4.1",
     "grunt-mkdir": "~0.1.1",
-    "grunt-contrib-compress": "~0.5.2"
+    "grunt-contrib-compress": "~0.5.2",
+    "gulp": "^3.8.11",
+    "duo": "^0.9.4",
+    "gulp-duo": "^0.2.0",
+    "del": "^1.1.1",
+    "eslint": "^0.15.0",
+    "gulp-eslint": "^0.4.3"
   }
 }

@@ -8,6 +8,7 @@ var debug = require('gulp-debug');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var zip = require('gulp-zip');
+var merge = require('merge-stream');
 
 // 一時ファイルを削除
 gulp.task('clean', function (cb) {
@@ -31,24 +32,26 @@ gulp.task('watch', ['build'], function () {
 
 // Extensionに含めるファイル群をコピー
 gulp.task('build', ['clean', 'lint'], function () {
-    gulp.src('css/*.css').pipe(
-        gulp.dest('packaging/css')
+    return merge(
+        gulp.src('css/*.css').pipe(
+            gulp.dest('packaging/css')
+        ),
+        gulp.src('icons/*.png').pipe(
+            gulp.dest('packaging/icons')
+        ),
+        gulp.src('lib/backgrounds.js').pipe(
+            gulp.dest('packaging/lib')
+        ),
+        gulp.src(['manifest.json', 'options.html', 'options.js']).pipe(
+            gulp.dest('packaging/')
+        ),
+        browserify({
+            entries: ['./lib/trigger.js']
+        })
+        .bundle()
+        .pipe(source('main.js'))
+        .pipe(gulp.dest('./packaging/includes'))
     );
-    gulp.src('icons/*.png').pipe(
-        gulp.dest('packaging/icons')
-    );
-    gulp.src('lib/backgrounds.js').pipe(
-        gulp.dest('packaging/lib')
-    );
-    gulp.src(['manifest.json', 'options.html', 'options.js']).pipe(
-        gulp.dest('packaging/')
-    );
-    return browserify({
-        entries: ['./lib/trigger.js']
-    })
-    .bundle()
-    .pipe(source('main.js'))
-    .pipe(gulp.dest('./packaging/includes'));
 });
 
 gulp.task('distribute', ['build'], function () {

@@ -7,9 +7,30 @@ var gutil = require('gulp-util');
 var debug = require('gulp-debug');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var zip = require('gulp-zip');
 
-// Extensionに含める静的ファイル群をコピー
-gulp.task('copy', function () {
+// 一時ファイルを削除
+gulp.task('clean', function (cb) {
+    return del([
+        'packaging/**',
+        'dist/**'
+    ], cb);
+});
+
+// 実行前にlintしておく
+gulp.task('lint', function () {
+    return gulp.src('lib/*.js')
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
+});
+
+gulp.task('watch', ['build'], function () {
+    gulp.watch('lib/*.js', ['lint']);
+});
+
+// Extensionに含めるファイル群をコピー
+gulp.task('build', ['clean', 'lint'], function () {
     gulp.src('css/*.css').pipe(
         gulp.dest('packaging/css')
     );
@@ -19,14 +40,9 @@ gulp.task('copy', function () {
     gulp.src('lib/backgrounds.js').pipe(
         gulp.dest('packaging/lib')
     );
-    return gulp.src(['manifest.json', 'options.html', 'options.js']).pipe(
+    gulp.src(['manifest.json', 'options.html', 'options.js']).pipe(
         gulp.dest('packaging/')
     );
-});
-
-// 以前は分割したファイルを単純に結合していたのでconcat。
-// 今はbuildとかの方が良いのかもしれない
-gulp.task('concat', function () {
     return browserify({
         entries: ['./lib/trigger.js']
     })
@@ -35,25 +51,13 @@ gulp.task('concat', function () {
     .pipe(gulp.dest('./packaging/includes'));
 });
 
-// 一時ファイルを削除
-gulp.task('clean', function (cb) {
-    del([
-        'packaging/**'
-    ], cb);
+gulp.task('distribute', ['build'], function () {
+    var manifest = require('./manifest.json');
+    return gulp.src('packaging/**/*')
+        .pipe(zip(manifest.name + '_' + manifest.version + '.zip'))
+        .pipe(gulp.dest('dist'));
 });
 
-gulp.task('lint', function () {
-    gulp.src('lib/*.js')
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failOnError());
-});
-
-gulp.task('watch', ['copy', 'concat'], function () {
-    gulp.watch('lib/*.js', ['lint', 'concat']);
-});
-
-gulp.task('default', ['clean', 'lint'], function () {
-    gulp.start('copy');
-    return gulp.start('concat');
+gulp.task('default', function () {
+    return gulp.start('build');
 });

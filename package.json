@@ -17,6 +17,7 @@
     "gulp-debug": "^2.0.0",
     "gulp-eslint": "^0.4.3",
     "gulp-util": "^3.0.3",
+    "gulp-zip": "^2.0.3",
     "vinyl-source-stream": "^1.0.0"
   }
 }

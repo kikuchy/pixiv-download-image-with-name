@@ -10,14 +10,13 @@
   "author": "kikuchy",
   "license": "MIT License",
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "duo": "^0.9.4",
-    "gulp-duo": "^0.2.0",
+    "browserify": "^9.0.3",
     "del": "^1.1.1",
     "eslint": "^0.15.0",
+    "gulp": "^3.8.11",
+    "gulp-debug": "^2.0.0",
     "gulp-eslint": "^0.4.3",
     "gulp-util": "^3.0.3",
-    "gulp-debug": "^2.0.0",
-    "gulp-exec": "^2.1.1"
+    "vinyl-source-stream": "^1.0.0"
   }
 }

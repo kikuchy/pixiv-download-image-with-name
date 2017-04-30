@@ -12,13 +12,15 @@
         "downloads",
         "webRequest",
         "webRequestBlocking",
-        "http://*.pixiv.net/"
+        "http://*.pixiv.net/",
+        "https://*.pixiv.net/"
     ],
 	"content_scripts": [{
 		"run_at": "document_start",
 		"js": ["includes/main.js"],
 		"matches": [
-			"http://www.pixiv.net/member_illust.php?*"
+			"http://www.pixiv.net/member_illust.php?*",
+            "https://www.pixiv.net/member_illust.php?*"
 		]
 	}],
     "options_page": "options.html",

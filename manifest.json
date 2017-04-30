@@ -13,7 +13,8 @@
         "webRequest",
         "webRequestBlocking",
         "http://*.pixiv.net/",
-        "https://*.pixiv.net/"
+        "https://*.pixiv.net/",
+        "*://*.pximg.net/"
     ],
 	"content_scripts": [{
 		"run_at": "document_start",
